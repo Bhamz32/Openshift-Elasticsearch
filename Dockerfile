@@ -55,9 +55,18 @@ RUN set -ex \
 		chown -R elasticsearch:elasticsearch "$path"; \
 	done
 
+RUN chmod -R 777 /usr $$ chmod -R 777 /etc && chmod -R 777 /opt && chmod -R 777 /var	
+	
+COPY config ./config
+
+RUN chmod -R 777 ./config
+
 VOLUME /usr/share/elasticsearch/data
 
-RUN chmod -R 777 /usr && chmod -R 777 /etc && chmod -R 777 /var
+COPY docker-entrypoint.sh /
+
+RUN chmod 777 /docker-entrypoint.sh
 
 EXPOSE 9200 9300
+ENTRYPOINT ["/docker-entrypoint.sh"]
 CMD ["elasticsearch"]
