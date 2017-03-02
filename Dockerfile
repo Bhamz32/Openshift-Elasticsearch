@@ -71,5 +71,7 @@ EXPOSE 9200 9300
 
 RUN /usr/share/elasticsearch/bin/elasticsearch-plugin install x-pack --batch
 
+RUN chmod -R 777 /usr && chmod -R 777 /etc && chmod -R 777 /var
+
 ENTRYPOINT ["/docker-entrypoint.sh"]
 CMD ["elasticsearch"]
