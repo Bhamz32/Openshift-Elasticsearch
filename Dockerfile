@@ -69,7 +69,5 @@ RUN chmod 777 /docker-entrypoint.sh
 
 EXPOSE 9200 9300
 
-sysctl -w vm.max_map_count=262144
-
 ENTRYPOINT ["/docker-entrypoint.sh"]
 CMD ["elasticsearch"]
