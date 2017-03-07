@@ -23,8 +23,9 @@ if [ "$1" = 'elasticsearch' -a "$(id -u)" = '0' ]; then
 fi
 
 if [ ${DATA_NODE_1} ]; then
-	echo "discovery.zen.ping.unicast.hosts: ['127.0.0.1', '${DATA_NODE_1}']" >> /etc/elasticsearch/elasticsearch.yml
+	echo "discovery.zen.ping.unicast.hosts: ['localhost', '${DATA_NODE_1}']" >> /usr/share/elasticsearch/config/elasticsearch.yml
 fi
+ls
 
 # As argument is not related to elasticsearch,
 # then assume that user wants to run his own process,
