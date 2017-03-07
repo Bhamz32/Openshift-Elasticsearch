@@ -22,6 +22,10 @@ if [ "$1" = 'elasticsearch' -a "$(id -u)" = '0' ]; then
 	#exec gosu elasticsearch "$BASH_SOURCE" "$@"
 fi
 
+if [ ${DATA_NODE_1} ]; then
+	echo "discovery.zen.ping.unicast.hosts: ['127.0.0.1', '${DATA_NODE_1}']" >> /etc/elasticsearch/elasticsearch.yml
+fi
+
 # As argument is not related to elasticsearch,
 # then assume that user wants to run his own process,
 # for example a `bash` shell to explore this image
