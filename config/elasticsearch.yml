@@ -1,5 +1,7 @@
 cluster.name: elk-prod
 
+network.host: 0.0.0.0
+
 node.name: master
 
 node.master: true 
