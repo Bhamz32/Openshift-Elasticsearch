@@ -24,7 +24,7 @@ fi
 
 if [ ${DATA_NODE_1} ]; then
 	echo "discovery.zen.ping.unicast.hosts: ['${HOST_URL}', '${DATA_NODE_1}']" >> /usr/share/elasticsearch/config/elasticsearch.yml
-	echo "node.name: ${HOST_URL}" >> /usr/share/elasticsearch/config/elasticsearch.yml
+	echo "network.host: ${HOST_URL}" >> /usr/share/elasticsearch/config/elasticsearch.yml
 fi
 
 ls
