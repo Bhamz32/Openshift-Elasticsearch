@@ -22,8 +22,19 @@ if [ "$1" = 'elasticsearch' -a "$(id -u)" = '0' ]; then
 	#exec gosu elasticsearch "$BASH_SOURCE" "$@"
 fi
 
-if [ ${DATA_NODE_1} ]; then
-	echo "discovery.zen.ping.unicast.hosts: ['localhost', '${DATA_NODE_1}']" >> /usr/share/elasticsearch/config/elasticsearch.yml
+if [ ${TYPE} == "master" ]; then
+	echo "discovery.zen.ping.unicast.hosts: ['localhost', '${DATA_NODE}']" >> /usr/share/elasticsearch/config/elasticsearch.yml
+	echo "node.name: master" >> /usr/share/elasticsearch/config/elasticsearch.yml
+	echo "node.master: true" >> /usr/share/elasticsearch/config/elasticsearch.yml
+	echo "node.data: false" >> /usr/share/elasticsearch/config/elasticsearch.yml
+fi
+
+if [ ${TYPE} == "data" ]; then
+	echo "discovery.zen.ping.unicast.hosts: ['localhost', '${MASTER_NODE}']" >> /usr/share/elasticsearch/config/elasticsearch.yml
+	echo "node.name: data" >> /usr/share/elasticsearch/config/elasticsearch.yml
+	echo "node.master: false" >> /usr/share/elasticsearch/config/elasticsearch.yml
+	echo "node.data: true" >> /usr/share/elasticsearch/config/elasticsearch.yml
+	echo "node.ingest: false" >> /usr/share/elasticsearch/config/elasticsearch.yml
 fi
 
 ls
