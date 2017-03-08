@@ -67,7 +67,7 @@ COPY docker-entrypoint.sh /
 
 RUN chmod 777 /docker-entrypoint.sh
 
-EXPOSE 9200 9300
+EXPOSE 9200 9300-9400
 
 ENTRYPOINT ["/docker-entrypoint.sh"]
 CMD ["elasticsearch"]
