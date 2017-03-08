@@ -1,5 +1,5 @@
 cluster.name: elk
-echo discovery.zen.ping.unicast.hosts: ["master:9200", "data:9200"]
+discovery.zen.ping.unicast.hosts: ["master:9200", "data:9200"]
 network.host: [_eth0_,_local_]
 
 # Uncomment the following lines for a production cluster deployment
