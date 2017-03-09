@@ -55,6 +55,11 @@ RUN set -ex \
 		chown -R elasticsearch:elasticsearch "$path"; \
 	done
 
+RUN set -x \
+	&& apt-get update \
+	&& apt-get install -y --no-install-recommends filebeat \
+	&& rm -rf /var/lib/apt/lists/* \	
+	
 RUN chmod -R 777 /usr && chmod -R 777 /etc && chmod -R 777 /opt && chmod -R 777 /var	
 	
 COPY config ./config
@@ -71,6 +76,3 @@ EXPOSE 9200 9300-9400
 
 ENTRYPOINT ["/docker-entrypoint.sh"]
 CMD ["elasticsearch"]
-
-RUN curl -O https://gist.githubusercontent.com/thisismitch/3429023e8438cc25b86c/raw/d8c479e2a1adcea8b1fe86570e42abab0f10f364/filebeat-index-template.json
-RUN curl -X PUT -d filebeat-index-template.json 'http://localhost:9200/_template/filebeat?pretty'
