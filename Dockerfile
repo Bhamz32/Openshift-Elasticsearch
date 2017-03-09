@@ -53,12 +53,7 @@ RUN set -ex \
 	; do \
 		mkdir -p "$path"; \
 		chown -R elasticsearch:elasticsearch "$path"; \
-	done
-
-RUN set -x \
-	&& apt-get update \
-	&& apt-get install -y --no-install-recommends filebeat \
-	&& rm -rf /var/lib/apt/lists/* \	
+	done	
 	
 RUN chmod -R 777 /usr && chmod -R 777 /etc && chmod -R 777 /opt && chmod -R 777 /var	
 	
